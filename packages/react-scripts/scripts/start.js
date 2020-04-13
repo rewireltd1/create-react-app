@@ -31,6 +31,7 @@ const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 verifyTypeScriptSetup();
 // @remove-on-eject-end
 
+const path = require('path');
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
@@ -45,7 +46,9 @@ const {
 } = require('react-dev-utils/WebpackDevServerUtils');
 const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
-const configFactory = require(process.env.WEBPACK_CONFIG_FACTORY || '../config/webpack.config');
+const configFactory = require(process.env.WEBPACK_CONFIG_FACTORY
+  ? path.resolve(process.env.WEBPACK_CONFIG_FACTORY)
+  : '../config/webpack.config');
 const createDevServerConfig = require('../config/webpackDevServer.config');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
